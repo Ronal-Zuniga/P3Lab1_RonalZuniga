@@ -3,6 +3,7 @@ using namespace std;
 int menu();
 void tablero(int n);
 int sumatoria(int n);
+double raiz(double n, int t);
 
 int main() {
 	int opcion;
@@ -43,7 +44,27 @@ int main() {
 			}
 
 			case 3: {
-
+				double n;
+				int t;
+				cout << "**Raiz Cuadrada**" << endl;
+				cout << "Ingrese el valor de n: ";
+				cin >> n;
+				while (n < 0) {
+					cout << "El valor de n NO puede ser negativo" << endl;
+					cout << "Ingrese el valor de n: ";
+					cin >> n;
+					cout << endl;
+				}
+				cout << "Ingrese el valor de t: ";
+				cin >> t;
+				while (t <= 10) {
+					cout << "t debe ser mayor que 10" << endl;
+					cout << "Ingrese el valor de t: ";
+					cin >> t;
+					cout << endl;
+				}
+				cout << "La raiz cuadrada de " << n << " es: " << raiz(n,t) << endl;
+				cout << endl;
 				break;
 			}
 		}//fin del switch
@@ -62,6 +83,12 @@ int menu() {
 	cout << "Ingrese la opcion: ";
 	cin >> opcion;
 	cout << endl;
+	while(opcion > 4 || opcion <= 0) {
+		cout << "La opcion debe de estar dentro del rango" << endl;
+		cout << "Ingrese la opcion: ";
+		cin >> opcion;
+		cout << endl;
+	}
 	return opcion;
 }
 
@@ -95,4 +122,24 @@ int sumatoria(int n) {
 		total += 2*i*(i-1);
 	}
 	return total;
+}
+
+double raiz(double n, int t) {
+	double max = n, inicio = 0;
+	double mitad = (max + inicio)/2;
+	for (int i = 0; i < t; i++) {
+		double aux = mitad*mitad;
+		if (aux == n) {
+			break;
+		}
+		if(aux > n) {
+			max = mitad;
+			mitad = (max + inicio)/2;
+		}
+		if(aux < n) {
+			inicio = mitad;
+			mitad = (max + inicio)/2;
+		}
+	}
+	return mitad;
 }
